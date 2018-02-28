@@ -26,7 +26,17 @@ public class Main {
         LocalDateTime date1 = LocalDateTime.of(1587, 8, 23, 11, 34);
         LocalDateTime date2 = LocalDateTime.of(1951, 8, 23, 11, 34);
         System.out.println(date2.toLocalDate().toEpochDay() - date1.toLocalDate().toEpochDay());
-        
+        //Given two dates, output the earlier.
+        if (date1.isBefore(date2)) {
+            System.out.println(date1);
+        } else {
+            System.out.println(date2);
+        }
+        //create a file with 100 random "month/day/year hour:minutes on each line
+
+        //store the data into an Arraylist of LocalDateTime objects
+
+        //Output the number of stored dates in a year
     }
 
 }
