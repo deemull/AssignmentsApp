@@ -23,6 +23,9 @@ public class Main {
         int days = (int) (today.toLocalDate().toEpochDay() - years);
         System.out.println(days);
         //Output the number of days between two dates
+        LocalDateTime date1 = LocalDateTime.of(1587, 8, 23, 11, 34);
+        LocalDateTime date2 = LocalDateTime.of(1951, 8, 23, 11, 34);
+        System.out.println(date2.toLocalDate().toEpochDay() - date1.toLocalDate().toEpochDay());
         
     }
 
