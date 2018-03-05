@@ -1,9 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("\n\nHello, AssignmentsApp!\n");
         // Output the current date-time
         LocalDateTime today = LocalDateTime.now();
@@ -33,9 +38,17 @@ public class Main {
             System.out.println(date2);
         }
         //create a file with 100 random "month/day/year hour:minutes on each line
-
+        //see Dates.txt
         //store the data into an Arraylist of LocalDateTime objects
-
+        Random rand = new Random();
+        ArrayList<String> dates = new ArrayList<>();
+        File readFile = new File("Dates");
+        Scanner fileScan = new Scanner(readFile);
+        while (fileScan.hasNextLine()) {
+            String date = fileScan.next();
+            dates.add(date);
+        }
+        System.out.println(dates);
         //Output the number of stored dates in a year
     }
 
