@@ -58,9 +58,11 @@ public class Main {
 
         //Count the number of stored dates in the current year
         int numDates = countNumDates(dates);
+        System.out.println(numDates);
 
         //Count the number of duplicates
-
+        int setDates = countDuplicates(dates);
+        System.out.println(setDates);
         //Sort the dates in chronological order
         Collections.sort(dates);
         System.out.println(dates);
@@ -131,16 +133,35 @@ public class Main {
         }
         return count;
     }
-    /*public static int countDuplicates(ArrayList<LocalDateTime> dates) {
+
+    public static int countDuplicates(ArrayList<LocalDateTime> dates) {
         int count = 0;
-        Set<LocalDateTime> date = new HashSet<>();
+        //Set<LocalDateTime> date = new HashSet<>();
         for (int i = 0; i < dates.size(); i++) {
             if (dates.get(i) == dates.get(i+1)) {
                 count++;
             }
         }
-
+        return count;
     }
+    /*public static int countAfterDates(ArrayList<LocalDateTime> dates) {
+        int count = 0;
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i).getHour() > dates.get(i+1).getHour()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    public static int countMonths(ArrayList<LocalDateTime> dates) {
+        int count = 0;
+        for (int i = 0; i < dates.size(); i++) {
+
+        }
+        return count;
+    }
+    public static
     */
+
 
 }
