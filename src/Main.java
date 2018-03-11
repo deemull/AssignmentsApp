@@ -141,8 +141,7 @@ public class Main {
 
         //Copy assign1 to assign3
         Assignment assign3 = new Assignment();
-        
-
+        assign1.equals(assign3);
 
     }
 
