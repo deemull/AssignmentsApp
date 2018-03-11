@@ -13,7 +13,7 @@ public class Main {
     static Random rand = new Random();
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println("\n\nHello, AssignmentsApp!\n");
 
         //Output the current date-time.
@@ -135,8 +135,17 @@ public class Main {
         EnumTest finalWork = new EnumTest(Category.FINAL_EXAM);
         finalWork.workWorth();
 
+        //In the driver, generate 2 random assignments named assign1 and assign2.
+        Assignment assign1 = new Assignment();
+        Assignment assign2 = new Assignment();
+
+        //Copy assign1 to assign3
+        Assignment assign3 = new Assignment();
+        
+
 
     }
+
     private static String formattedDate(LocalDateTime date) {
         String newDate = "";
         newDate += date.format(DateTimeFormatter.ofPattern("MMMM "));
