@@ -1,20 +1,24 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Random;
 
 public class Assignment {
-    LocalDateTime day;
-    EnumTest whichClass;
-    EnumTest work;
-    ArrayList<Integer> priority;
+    private LocalDateTime day;
+    private EnumTest whichClass;
+    private EnumTest work;
+    private int priority;
+    Random rand;
 
     public Assignment() {
         day = LocalDateTime.now();
         whichClass = new EnumTest(Course.SLAVERYANDSERVITUDE);
         work = new EnumTest(Category.HOMEWORK);
-        priority = new ArrayList<>();
+        rand = new Random();
+        priority = rand.nextInt(4);
     }
 
-    public Assignment(LocalDateTime day, EnumTest whichClass, EnumTest work, ArrayList<Integer> priority) {
+    public Assignment(LocalDateTime day, EnumTest whichClass, EnumTest work, int priority) {
         this.day = day;
         this.whichClass = whichClass;
         this.work = work;
@@ -45,17 +49,34 @@ public class Assignment {
         this.work = work;
     }
 
-    public ArrayList<Integer> getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(ArrayList<Integer> priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
     @Override
     public String toString() {
         return "Assignment{" + day + whichClass + work + priority + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Assignment that = (Assignment) o;
+        return priority == that.priority &&
+                Objects.equals(day, that.day) &&
+                Objects.equals(whichClass, that.whichClass) &&
+                Objects.equals(work, that.work);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(day, whichClass, work, priority, rand);
     }
 
 }

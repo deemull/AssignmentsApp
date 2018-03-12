@@ -136,12 +136,16 @@ public class Main {
         finalWork.workWorth();
 
         //In the driver, generate 2 random assignments named assign1 and assign2.
-        Assignment assign1 = new Assignment();
+        Assignment assign1 = new Assignment(LocalDateTime.now(), new EnumTest(Course.SLAVERYANDSERVITUDE),
+                new EnumTest(Category.HOMEWORK), rand.nextInt(4));
         Assignment assign2 = new Assignment();
 
         //Copy assign1 to assign3
         Assignment assign3 = new Assignment();
         assign1.equals(assign3);
+
+        //Override an Assignment.equals() method
+
 
     }
 
