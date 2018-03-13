@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
@@ -79,14 +78,16 @@ public class Assignment {
         return Objects.hash(day, whichClass, work, priority, rand);
     }
 
-    public String compareTo(LocalDateTime dateTime) {
-        if (getDay().isBefore(dateTime)) {
-            return "BEFORE";
-        } else if (getDay().isAfter(dateTime)) {
-            return "AFTER";
-        } else {
-            return "EQUALS";
-        }
+    public int compareTo(Assignment dateTime) {
+        if (getDay().compareTo(dateTime.getDay()) == 0)
+            if (getDay().isEqual(dateTime.getDay())) {
+                return 0;
+        } else if (getDay().isAfter(dateTime.getDay())) {
+                return 1;
+            } else {
+                return -1;
+            }
+        return getDay().compareTo(dateTime.getDay());
     }
 
 }
