@@ -79,4 +79,14 @@ public class Assignment {
         return Objects.hash(day, whichClass, work, priority, rand);
     }
 
+    public String compareTo(LocalDateTime dateTime) {
+        if (getDay().isBefore(dateTime)) {
+            return "BEFORE";
+        } else if (getDay().isAfter(dateTime)) {
+            return "AFTER";
+        } else {
+            return "EQUALS";
+        }
+    }
+
 }

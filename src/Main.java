@@ -144,8 +144,15 @@ public class Main {
         Assignment assign3 = new Assignment();
         assign1.equals(assign3);
 
-        //Override an Assignment.equals() method
-
+        //Override an Assignment.equals() method (see class)
+        //Which of assign1, assign2, or assign3 is the earliest?
+        if (assign1.getDay().isBefore(assign2.getDay()) && assign1.getDay().isBefore(assign3.getDay())) {
+            System.out.println(assign1);
+        } else if (assign2.getDay().isBefore(assign1.getDay()) && assign2.getDay().isBefore(assign3.getDay())) {
+            System.out.println(assign2);
+        } else {
+            System.out.println(assign3);
+        }
 
     }
 
