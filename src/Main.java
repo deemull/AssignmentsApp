@@ -148,10 +148,27 @@ public class Main {
 
         //Override an Assignment.equals() method (see class)
         //Which of assign1, assign2, or assign3 is the earliest?
-        assign1.compareTo(assign2);
-        assign2.compareTo(assign3);
-        assign3.compareTo(assign1);
-        
+        int ans = assign1.compareTo(assign2);
+        System.out.println(ans);
+        int ans2 = assign2.compareTo(assign3);
+        System.out.println(ans2);
+        int ans3 = assign3.compareTo(assign1);
+        System.out.println(ans3);
+
+
+        //TODO Write [X] randomly generated assignments to the file 'input.dat'
+        //TODO Read assignments from the file and store them in an Assignment object
+        //TODO Remove any duplicate assignments (Java Set)
+        //TODO Count the number of assignments for Course [C]
+        //TODO What are the Course [C] assignments?
+        //TODO Sort the assignments in reverse chronological order
+        //TODO Sort the assignments by increasing priority order
+        //TODO Sort the assignments by Course
+        //TODO Which assignments are due today?
+        //TODO Which assignments are due within [X] days?
+        //TODO Which assignments are past due, sorted by Course
+        //TODO What is the next assignment due for each course?
+        //TODO What are the highest priority assignments that are still due, sorted by date.
     }
 
     private static String formattedDate(LocalDateTime date) {
