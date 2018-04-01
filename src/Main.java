@@ -2,12 +2,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     static Random rand = new Random();
@@ -95,6 +97,7 @@ public class Main {
         //Determine the indexes of the elements that have the earliest starting time, regardless of date.
         System.out.println("\nThe index of the date with the earliest starting time is " + indexEarliestTime(hundredRandomDates));
 
+        //foreach: something.foreach(num --> sout(num)
         //Output a date in the format "January 1st, 2018".
         System.out.print("\nWhat is the index of the date you want to be outputted in the format \"January 1st, 2018\"? ");
         System.out.println("The formatted date is " + formattedDate(hundredRandomDates.get(sc.nextInt())));
@@ -138,10 +141,10 @@ public class Main {
         //In the driver, generate 2 random assignments named assign1 and assign2.
         Assignment assign1 = new Assignment(LocalDateTime.now(), new EnumTest(Course.SLAVERYANDSERVITUDE),
                 new EnumTest(Category.HOMEWORK), rand.nextInt(4));
-        Assignment assign2 = new Assignment();
+        Assignment assign2 = new Assignment(LocalDateTime.parse(values[0]), Course.valueOf(values[1]), Category.valueOf(values[2]), Integer.parseInt(values[3]));
 
         //Copy assign1 to assign3
-        Assignment assign3 = new Assignment();
+        Assignment assign3 = new Assignment(LocalDateTime.parse(values[0]), Course.valueOf(values[1]), Category.valueOf(values[2]), Integer.parseInt(values[3]));
         assign1.equals(assign3);
         System.out.println(assign1);
         System.out.println(assign3);
@@ -157,11 +160,21 @@ public class Main {
 
 
         //TODO Write [X] randomly generated assignments to the file 'input.dat'
+        System.out.print("\nHow many assignments do you want saved onto the file? ");
+        generateAssignmentsFile("input.dat", sc.nextInt());
+
         //TODO Read assignments from the file and store them in an Assignment object
+        ArrayList<Assignment> assignmentsArray = fileToListAssignment("input.dat");
+        assignmentsArray.forEach(assignment -> System.out.println("Assignment in array: " + assignment));
+
         //TODO Remove any duplicate assignments (Java Set)
+        ArrayList<Assignment> uniqueAssignments = removeDuplicateAssignments(assign1, assign2, assign3);
+        System.out.println("The unique assignments are " + uniqueAssignments);
+
         //TODO Count the number of assignments for Course [C]
         //TODO What are the Course [C] assignments?
         //TODO Sort the assignments in reverse chronological order
+        //Collections.sort(Assignment object, (a,b) --> a > b)
         //TODO Sort the assignments by increasing priority order
         //TODO Sort the assignments by Course
         //TODO Which assignments are due today?
@@ -255,12 +268,12 @@ public class Main {
     private static ArrayList<LocalDateTime> randomDateArray(int NumElements) {
         ArrayList<LocalDateTime> returnArray = new ArrayList<>();
         for (int i = 0; i < NumElements; i++) {
-            returnArray.add(randomDateGenerator());
+            returnArray.add(randDateGenerator());
         }
         return returnArray;
     }
 
-    private static LocalDateTime randomDateGenerator() {
+    private static LocalDateTime randDateGenerator() {
         long startOfTime = ChronoUnit.MINUTES.between(LocalDateTime.of(0, 1, 1, 0, 0), LocalDateTime.now());
         long minutes = rand.nextInt((int) startOfTime);
         return LocalDateTime.now().minusMinutes(minutes);
@@ -273,5 +286,43 @@ public class Main {
         }
         return earlyDate;
     }
+
+    private static Assignment randomAssignmentGenerator() {
+        return new Assignment(randDateGenerator(), Course.DATASTRUCTURES, Category.HOMEWORK, rand.nextInt(4));
+    }
+
+    private static void generateAssignmentsFile(String fileName, int numAssignments) {
+        File inFile = new File(fileName);
+        int count = numAssignments;
+        try (PrintWriter pw = new PrintWriter(inFile)) {
+            while (count != 0) {
+                pw.println(randomAssignmentGenerator());
+                count--;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static ArrayList<Assignment> fileToListAssignment(String fileName) {
+        ArrayList<Assignment> returnArray = new ArrayList<>();
+        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+            stream.forEach(line -> returnArray.add(Assignment.valueOf(line)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnArray;
+    }
+
+    private static ArrayList<Assignment> removeDuplicateAssignments(ArrayList<Assignment> assignmentsArray) {
+        return new ArrayList<>(new HashSet<>(assignmentsArray));
+    }
+
+    private static ArrayList<Assignment> removeDuplicateAssignments(Assignment... assignments) {
+        ArrayList<Assignment> assignmentsArray = new ArrayList<>();
+        Collections.addAll(assignmentsArray, assignments);
+        return removeDuplicateAssignments(assignmentsArray);
+    }
+
 }
 

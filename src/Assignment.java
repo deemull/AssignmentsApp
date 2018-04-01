@@ -9,12 +9,12 @@ public class Assignment {
     private int priority;
     Random rand;
 
-    public Assignment() {
+    public Assignment(LocalDateTime parse, Course course, Category category, int priority) {
         day = LocalDateTime.now();
         whichClass = new EnumTest(Course.SLAVERYANDSERVITUDE);
         work = new EnumTest(Category.HOMEWORK);
         rand = new Random();
-        priority = rand.nextInt(4);
+        this.priority = rand.nextInt(4);
     }
 
     public Assignment(LocalDateTime day, EnumTest whichClass, EnumTest work, int priority) {
@@ -88,6 +88,15 @@ public class Assignment {
                 return -1;
             }
         return getDay().compareTo(dateTime.getDay());
+        //return getDay() - dateTime. getDay();
     }
+
+    public static Assignment valueOf(String assignmentValue) {
+        assignmentValue = assignmentValue.substring(assignmentValue.indexOf("{") + 1, assignmentValue.indexOf("}"));
+        assignmentValue = assignmentValue.replaceAll("priority: ", "");
+        String[] values = assignmentValue.split(", ");
+        return new Assignment(LocalDateTime.parse(values[0]), Course.valueOf(values[1]), Category.valueOf(values[2]), Integer.parseInt(values[3]));
+    }
+
 
 }
